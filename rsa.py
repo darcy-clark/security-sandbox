@@ -6,18 +6,18 @@ m = 0
 iteration = 0
 for char in message:
     print('ASCII for "' + char + '": ' + str(ord(char)))
-    if iteration > 0:
-        m = 256**iteration + ord(char)
-    else:
-        m = ord(char)
+    m = 256**iteration - 1 + ord(char)
     iteration = iteration + 1
 
 print('m=' + str(m))
 
-p = 11
-q = 13
+# Size of our n value (p*q) limits the possible size of our message. n must be larger than m, otherwise
+# the lowest congruent value will not be our original message
+p = 41
+q = 61
 
 print('Using p=' + str(p) + ' and q=' + str(q))
+print('n=' + str(p * q))
 
 sigma_num = (p - 1)*(q - 1)
 
@@ -41,7 +41,7 @@ cipher = m**e % (p * q)
 
 print('Cipher is: ' + str(cipher))
 
-d = 43 # temporarily hardcoded until I get the EEA
+d = 103 # temporarily hardcoded until I get the EEA
 
 retrieved = cipher**d % (p * q)
 print('Retrieved message is: ' + str(retrieved))
